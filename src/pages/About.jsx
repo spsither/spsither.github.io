@@ -41,27 +41,24 @@ export default function About() {
               satellite imaging platforms, Tibetan language AI models, and
               museum-scale image archives.
             </p>
-
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link
-                to="/art"
-                className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text">
-                Art
-              </Link>
-
-              <Link
-                to="/engineering"
-                className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text"
-              >
-                Engineering
-              </Link>
-
-            </div>
             <p className="mt-4 leading-relaxed text-muted">
               Alongside engineering, I create original paintings, working
               primarily in oil and acrylic on canvas.
             </p>
             <div className="mt-8 flex flex-wrap gap-6">
+              <Link
+                to="/art"
+                className="text-sm tracking-[0.04em] text-accent transition-opacity hover:opacity-70"
+              >
+                View Art ↗
+              </Link>
+              <Link
+                to="/engineering"
+                className="text-sm tracking-[0.04em] text-accent transition-opacity hover:opacity-70"
+              >
+                View Engineering ↗
+              </Link>
+
               {socials.map(l => (
                 <a
                   key={l.href}

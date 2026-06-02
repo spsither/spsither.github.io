@@ -22,13 +22,13 @@ export const videos = [
       'Sixty-five years after the 1959 uprising, the Tibetan struggle endures — in exile and inside Tibet.',
   },
   {
-    id: 'QrQ1lUepE60',
-    title: 'Voices from the Plateau',
-    caption: 'Testimony from those who carry the memory of a free Tibet.',
+    id: 'kO5bsC-9utk',
+    title: 'Inside the Tibetan Resistance',
+    caption: 'As the Dalai Lama turns 90, BBC News visits the communities keeping Tibet’s culture, identity, and freedom movement alive in exile.',
   },
   {
     id: '7HGZXcBq87c',
-    title: 'The Cost of Silence',
-    caption: 'On occupation, resistance, and the price of speaking the truth.',
+    title: 'A Tibetan’s Journey for Justice',
+    caption: 'Tashi Wangchuk’s campaign to protect Tibetan language rights reveals the challenges faced by Tibetans seeking to preserve their culture and identity.',
   },
 ]

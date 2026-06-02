@@ -41,50 +41,81 @@ export const timeline = [
     year: '1949–50',
     title: 'The invasion',
     text: 'The newly founded People’s Republic of China sends the People’s Liberation Army into eastern Tibet. In October 1950 some 40,000 troops overwhelm Tibet’s small army at Chamdo.',
+    image: {
+      src: '/src/assets/invasion.png',
+      alt: 'PLA enters Tibet, 1950',
+      caption: "People's Liberation Army enters Tibet, October 1950",
+    },
   },
   {
     year: '1951',
     title: 'The 17-Point Agreement',
     text: 'A Tibetan delegation is pressured into signing the “Seventeen Point Agreement” in Beijing under duress, formalising Chinese control. Tibetans have long rejected it as signed without authority and under coercion.',
+    image: null,
   },
   {
     year: '1959',
     title: 'The Lhasa Uprising',
     text: 'Fearing the Dalai Lama would be seized, tens of thousands of Tibetans surround the Norbulingka palace. The uprising is crushed; the 14th Dalai Lama escapes across the Himalayas to India. Tens of thousands of Tibetans are killed in the months that follow.',
+    image: {
+      src: '/src/assets/59lhasa.jpg',
+      alt: 'Lhasa uprising, 1959',
+      caption: 'The Lhasa Uprising — March 10, 1959',
+    },
   },
   {
     year: '1959–60',
     title: 'A government in exile',
     text: 'The Dalai Lama re-establishes the Tibetan government in Dharamsala, India — today the Central Tibetan Administration — and tens of thousands of refugees follow him into exile, building schools and monasteries to keep the culture alive.',
+    image: null,
   },
   {
     year: '1966–76',
     title: 'The Cultural Revolution',
     text: 'Religion is outlawed and the vast majority of Tibet’s 6,000+ monasteries are destroyed. Monks and nuns are forcibly disrobed; sacred texts and art are burned. Famine and political campaigns claim countless Tibetan lives.',
+    image: null,
   },
   {
     year: '1987–89',
     title: 'Protests and martial law',
     text: 'Mass independence protests erupt in Lhasa. The crackdown culminates in martial law in March 1989. That December, the Dalai Lama is awarded the Nobel Peace Prize for his nonviolent struggle.',
+    image: { src: '/src/assets/protest.png', alt: 'Protests, Lhasa 1987', caption: 'Protests erupt in Lhasa, September 1987' },
   },
   {
     year: '1995',
     title: 'The disappeared Panchen Lama',
     text: 'The Dalai Lama recognises six-year-old Gedhun Choekyi Nyima as the 11th Panchen Lama. Days later Chinese authorities seize the boy and install their own candidate. He has never been seen publicly since — among the world’s longest-held political prisoners.',
+    image: null,
   },
   {
     year: '2008',
     title: 'The plateau rises',
     text: 'Months before the Beijing Olympics, protests sweep across the entire Tibetan plateau — the largest unrest in decades. The response is a sweeping, often deadly, security clampdown.',
+    image: { 
+      src: '/src/assets/08uprising.jpg', 
+      alt: 'Uprising, 2008', 
+      caption: 'Nationwide uprising, March 2008' 
+    },
   },
   {
     year: '2009–present',
     title: 'The self-immolations',
     text: 'Beginning with the monk Tapey in Ngaba, more than 150 Tibetans set themselves on fire in protest, most calling for freedom and the Dalai Lama’s return — the starkest measure of a people’s desperation.',
+    image: null,
   },
   {
     year: 'Today',
     title: 'The struggle continues',
     text: 'Under intensifying surveillance, forced assimilation, and colonial boarding schools that separate a million Tibetan children from their language, the freedom struggle endures — in exile and inside Tibet.',
+    image: null,
   },
+]
+
+export const gridImages = [
+  { src: '/src/assets/lushtibet.png', alt: 'Lush Tibetan plateau', caption: 'Lush green grass as far as the eye can see - the reason for the annual migration' },
+  { src: '/src/assets/kids.jpg', alt: 'Two Tibetan boys', caption: 'Two boys crossing a ditch. Tibet, 2003.' },
+  { src: '/src/assets/happymonks.jpg', alt: 'Young Buddhist monks playing', caption: 'Young Buddhist novice monks play at a Tibetan nomadic summer grazing area in Yushu County' },
+  { src: '/src/assets/showlepord.jpeg', alt: 'Snow Leopard', caption: 'Snow Leopard' },
+  { src: '/src/assets/horse.png', alt: 'Tibetan nomad skills', caption: 'An ethnic Tibetan nomad performs skills during a riding competition at a local festival on July 26, 2015.' },
+  { src: '/src/assets/amney.jpeg', alt: 'Amnye Machen Holy Mountain', caption: 'Amnye Machen Holy Mountain' },
 ]
