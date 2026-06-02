@@ -1,5 +1,6 @@
 import PageHeader from '../components/PageHeader'
 import Reveal from '../components/Reveal'
+import { Link } from 'react-router-dom'
 
 const experience = [
   { role: 'Software Consultant', company: 'Studio Nyandak', location: 'NYC', period: 'Apr 2024–Present' },
@@ -42,19 +43,18 @@ export default function About() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-4">
-              <a
-              href="/art"
-              className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text"
-            >
-              Art
-            </a>
+              <Link
+                to="/art"
+                className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text">
+                Art
+              </Link>
 
-            <a
-              href="/engineering"
-              className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text"
-            >
-              Engineering
-            </a>
+              <Link
+                to="/engineering"
+                className="inline-flex items-center px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] border border-line transition-colors hover:border-text"
+              >
+                Engineering
+              </Link>
 
             </div>
             <p className="mt-4 leading-relaxed text-muted">
