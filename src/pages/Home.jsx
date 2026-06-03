@@ -59,7 +59,7 @@ function PhotoGrid({ images, eyebrow }) {
             >
               <figure className="group relative h-full min-h-[200px] overflow-hidden">
                 <img
-                  src={img.src}
+                  src={img.image}
                   alt={img.alt}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
