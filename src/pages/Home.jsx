@@ -112,15 +112,31 @@ function TimelineRow({ t, delay = 0 }) {
 
 export default function Home() {
   const heroRef = useRef(null)
+  const timelineRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
   const glowY = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
   const titleY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const titleOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   const [showAllHistory, setShowAllHistory] = useState(false)
-  const HISTORY_PREVIEW = 4
+  const HISTORY_PREVIEW = 3
   const previewTimeline = timeline.slice(0, HISTORY_PREVIEW)
   const restTimeline = timeline.slice(HISTORY_PREVIEW)
+
+  const toggleHistory = () => {
+    if (showAllHistory) {
+      setShowAllHistory(false)
+
+      setTimeout(() => {
+        timelineRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      }, 50)
+    } else {
+      setShowAllHistory(true)
+    }
+  }
 
   return (
     <main>
@@ -278,6 +294,7 @@ export default function Home() {
       {/* ── Timeline ──────────────────────────────────────────── */}
       <section
         id="timeline"
+        ref={timelineRef}
         className="scroll-mt-20 border-t border-line py-20 md:py-28"
       >
         <div className="container">
@@ -313,7 +330,7 @@ export default function Home() {
             </AnimatePresence>
             {restTimeline.length > 0 && (
               <button
-                onClick={() => setShowAllHistory(v => !v)}
+                onClick={toggleHistory}
                 className="mt-8 inline-flex items-center gap-2 border border-line px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] transition-colors hover:border-text"
               >
                 {showAllHistory ? 'Show less' : `Show all ${timeline.length} chapters`}
