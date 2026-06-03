@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <title>Loading...</title>
-
     <script>
-      (function () {
-        const path = location.pathname + location.search + location.hash
-
-        // Encode path into query string instead of sessionStorage
-        // This makes it available immediately on first paint
-        const redirectUrl =
-          '/?redirect=' + encodeURIComponent(path)
-
-        location.replace(redirectUrl)
-      })()
+        const path = location.pathname + location.search
+        location.replace('/?redirect=' + encodeURIComponent(path))
     </script>
-  </head>
-
-  <body>
-    <p style="font-family: sans-serif;">Loading…</p>
-  </body>
+</head>
 </html>

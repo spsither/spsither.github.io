@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import ScrollProgress from './components/ScrollProgress'
 import ScrollToTop from './components/ScrollToTop'
@@ -17,30 +16,6 @@ import SelfImmolations from './pages/SelfImmolations'
 import Namkyi from './pages/Namkyi'
 
 export default function App() {
-  const navigate = useNavigate()
-  const location = useLocation()
-
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const redirect = params.get('redirect')
-
-    if (redirect) {
-      const decoded = decodeURIComponent(redirect)
-
-      // clean URL BEFORE first paint
-      window.history.replaceState({}, '', decoded)
-
-      navigate(decoded, { replace: true })
-    }
-
-    setReady(true)
-  }, [])
-
-  // 🚨 IMPORTANT: block render until redirect is resolved
-  if (!ready) return null
-
   return (
     <NavOverlayProvider>
       <ScrollToTop />
