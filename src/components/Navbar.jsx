@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
@@ -15,6 +15,7 @@ const links = [
 
 function ThemeToggle({ className = '', light = false }) {
   const { theme, toggle } = useTheme()
+
   return (
     <button
       onClick={toggle}
@@ -34,16 +35,48 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { overDark } = useNavOverlay()
+  const location = useLocation()
 
+  const navLinks = links.filter(l => l.to !== '/')
+
+  // Close mobile menu on route change (important UX fix)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    setOpen(false)
+  }, [location.pathname])
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  // Scroll tracking (optimized)
+  useEffect(() => {
+    let ticking = false
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll)
+
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Over a dark hero (and before the backdrop kicks in on scroll), force the
-  // light-on-dark treatment regardless of the active theme.
   const light = overDark && !scrolled
 
   const linkClass = ({ isActive }) =>
@@ -59,10 +92,8 @@ export default function Navbar() {
   return (
     <nav
       className={[
-        'fixed inset-x-0 top-0 z-50 h-16 transition-colors duration-300',
-        scrolled
-          ? 'border-b border-border bg-bg/85 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent',
+        'fixed inset-x-0 top-0 z-50 h-16 border-b border-border bg-bg/0 backdrop-blur-md transition-colors duration-300',
+        scrolled && 'bg-bg/85',
       ].join(' ')}
     >
       <div className="container flex h-full items-center justify-between">
@@ -79,15 +110,13 @@ export default function Navbar() {
         {/* Desktop */}
         <div className="hidden items-center gap-8 md:flex">
           <ul className="flex items-center gap-8">
-            {links
-              .filter(l => l.to !== '/')
-              .map(l => (
-                <li key={l.to}>
-                  <NavLink to={l.to} className={linkClass}>
-                    {l.label}
-                  </NavLink>
-                </li>
-              ))}
+            {navLinks.map(l => (
+              <li key={l.to}>
+                <NavLink to={l.to} className={linkClass}>
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
           <ThemeToggle light={light} />
         </div>
@@ -111,17 +140,16 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
             className="absolute inset-x-0 top-16 flex flex-col gap-5 border-b border-border bg-bg/98 px-6 py-7 backdrop-blur-md md:hidden"
           >
             {links.map(l => (
               <NavLink
                 key={l.to}
                 to={l.to}
-                onClick={() => setOpen(false)}
                 className="font-display text-3xl font-extrabold uppercase"
               >
                 {l.label}
