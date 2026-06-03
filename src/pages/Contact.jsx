@@ -15,6 +15,34 @@ const labelClass =
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setSending(true)
+
+    const formData = new FormData(e.target)
+
+    try {
+      const response = await fetch(
+        'https://formspree.io/f/mdavonww',
+        {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+          },
+        }
+      )
+
+      if (response.ok) {
+        setSent(true)
+        e.target.reset()
+      }
+    } finally {
+      setSending(false)
+    }
+  }
 
   return (
     <main>
@@ -49,10 +77,7 @@ export default function Contact() {
           <Reveal delay={0.1}>
             {!sent ? (
               <form
-                onSubmit={e => {
-                  e.preventDefault()
-                  setSent(true)
-                }}
+                onSubmit={handleSubmit}
                 className="flex flex-col gap-6"
               >
                 {['Name', 'Email', 'Subject'].map(field => (
@@ -62,6 +87,7 @@ export default function Contact() {
                     </label>
                     <input
                       id={field}
+                      name={field.toLowerCase()}
                       type={field === 'Email' ? 'email' : 'text'}
                       required
                       className={fieldClass}
@@ -74,6 +100,7 @@ export default function Contact() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={5}
                     required
                     className={`${fieldClass} resize-none`}
@@ -81,9 +108,10 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className="self-start bg-accent px-9 py-3.5 text-sm uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-90"
+                  disabled={sending}
+                  className="self-start bg-accent px-9 py-3.5 text-sm uppercase tracking-[0.08em] text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                 >
-                  Send Message
+                  {sending ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             ) : (
