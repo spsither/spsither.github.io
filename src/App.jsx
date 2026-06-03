@@ -12,8 +12,21 @@ import Contact from './pages/Contact'
 import WorkDetail from './pages/WorkDetail'
 import SelfImmolations from './pages/SelfImmolations'
 import Namkyi from './pages/Namkyi'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function App() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const redirect = sessionStorage.getItem('redirect')
+
+    if (redirect) {
+      sessionStorage.removeItem('redirect')
+      navigate(redirect, { replace: true })
+    }
+  }, [navigate])
+
   return (
     <BrowserRouter>
       <NavOverlayProvider>
