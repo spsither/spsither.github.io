@@ -276,7 +276,10 @@ export default function Home() {
       <Statement statement={statements[1]} align="right" />
 
       {/* ── Timeline ──────────────────────────────────────────── */}
-      <section id="timeline" className="scroll-mt-20 border-t border-line py-20 md:py-28">
+      <section
+        id="timeline"
+        className="scroll-mt-20 border-t border-line py-20 md:py-28"
+      >
         <div className="container">
           <Reveal>
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-accent">A history</p>
@@ -285,7 +288,7 @@ export default function Home() {
           <div className="mt-14">
             {previewTimeline.map((t, i) => (
               <TimelineRow
-                key={i}
+                key={i.id}
                 t={t}
                 delay={(i % 3) * 0.05}
               />
@@ -297,12 +300,11 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
+                  transition={{ duration: 0.3 }}
                 >
-                  {restTimeline.map((t, i) => (
+                  {restTimeline.map((t) => (
                     <TimelineRow
-                      key={i}
+                      key={t.id}
                       t={t}
                     />
                   ))}
@@ -356,7 +358,7 @@ export default function Home() {
             to="/contact"
             className="mt-10 group inline-flex items-center gap-2 bg-accent px-9 py-4 font-mono text-xs uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-90"
           >
-            Take action <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
+            Take action <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </Reveal>
       </section>
