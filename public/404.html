@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // Save the current path
-      sessionStorage.setItem('redirect', location.pathname + location.search)
-      // Go to root
-      location.replace('/')
+        (function () {
+            const path = location.pathname + location.search + location.hash
+            sessionStorage.setItem('redirect', path)
+            location.replace('/')
+        })()
     </script>
-  </head>
-  <body>
-  <p style="font-family: sans-serif;">
-    Loading…
-  </p>
+</head>
+
+<body>
+    <p style="font-family: sans-serif;">
+        Loading…
+    </p>
 </body>
+
 </html>
