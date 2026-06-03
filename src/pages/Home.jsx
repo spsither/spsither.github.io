@@ -354,9 +354,9 @@ export default function Home() {
           </p>
           <Link
             to="/contact"
-            className="mt-10 inline-flex items-center gap-2 bg-accent px-8 py-4 font-mono text-xs uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-90"
+            className="mt-10 group inline-flex items-center gap-2 bg-accent px-9 py-4 font-mono text-xs uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-90"
           >
-            Take action <ArrowUpRight size={16} />
+            Take action <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
           </Link>
         </Reveal>
       </section>
