@@ -5,11 +5,16 @@ export default function RedirectHandler() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const redirect = sessionStorage.getItem('redirect')
+    const params = new URLSearchParams(window.location.search)
+    const redirect = params.get('redirect')
 
     if (redirect) {
-      sessionStorage.removeItem('redirect')
-      navigate(redirect, { replace: true })
+      const decoded = decodeURIComponent(redirect)
+
+      // clean URL BEFORE navigating (prevents flicker)
+      window.history.replaceState({}, '', decoded)
+
+      navigate(decoded, { replace: true })
     }
   }, [navigate])
 
