@@ -1,11 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 
 import ScrollProgress from './components/ScrollProgress'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { NavOverlayProvider } from './components/NavOverlay'
-import RedirectHandler from './components/RedirectHandler'
 
 import Home from './pages/Home'
 import Art from './pages/Art'
@@ -17,29 +17,48 @@ import SelfImmolations from './pages/SelfImmolations'
 import Namkyi from './pages/Namkyi'
 
 export default function App() {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const redirect = params.get('redirect')
+
+    if (redirect) {
+      const decoded = decodeURIComponent(redirect)
+
+      // clean URL BEFORE first paint
+      window.history.replaceState({}, '', decoded)
+
+      navigate(decoded, { replace: true })
+    }
+
+    setReady(true)
+  }, [])
+
+  // 🚨 IMPORTANT: block render until redirect is resolved
+  if (!ready) return null
+
   return (
-    <>
-      {/* Handles GitHub Pages deep-link redirect */}
-      <RedirectHandler />
+    <NavOverlayProvider>
+      <ScrollToTop />
+      <ScrollProgress />
+      <Navbar />
 
-      <NavOverlayProvider>
-        <ScrollToTop />
-        <ScrollProgress />
-        <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/self-immolations" element={<SelfImmolations />} />
+        <Route path="/namkyi" element={<Namkyi />} />
+        <Route path="/art" element={<Art />} />
+        <Route path="/engineering" element={<Engineering />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/art/:slug" element={<WorkDetail />} />
+      </Routes>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/self-immolations" element={<SelfImmolations />} />
-          <Route path="/namkyi" element={<Namkyi />} />
-          <Route path="/art" element={<Art />} />
-          <Route path="/engineering" element={<Engineering />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/art/:slug" element={<WorkDetail />} />
-        </Routes>
-
-        <Footer />
-      </NavOverlayProvider>
-    </>
+      <Footer />
+    </NavOverlayProvider>
   )
 }
