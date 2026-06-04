@@ -141,12 +141,16 @@ export default function Home() {
   return (
     <main>
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative flex min-h-screen items-center overflow-hidden">
-        <motion.div
-          style={{ y: glowY }}
-          className="glow pointer-events-none absolute left-1/2 top-1/2 h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2"
-        />
-        <motion.div style={{ y: titleY, opacity: titleOpacity }} className="container relative">
+      <section
+        ref={heroRef}
+        className="relative flex items-center overflow-hidden"
+        style={{ minHeight: "100dvh" }}   // dvh: stable on mobile, no address-bar jump
+      >
+        {/* Glow — no parallax, position stays locked */}
+        <div className="glow pointer-events-none absolute left-1/2 top-1/2 h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2" />
+
+        {/* Content — no parallax on the hero itself */}
+        <div className="container relative">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,6 +159,7 @@ export default function Home() {
           >
             Occupied since 1950 · The struggle continues
           </motion.p>
+
           <h1 className="font-display text-mega font-black">
             <motion.span
               initial={{ opacity: 0, y: 40 }}
@@ -173,6 +178,7 @@ export default function Home() {
               Tibet
             </motion.span>
           </h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -183,6 +189,7 @@ export default function Home() {
             Tibet — its occupation, its exile, and a freedom struggle carried in language, faith,
             and memory.
           </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,10 +201,7 @@ export default function Home() {
               className="group inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-mono text-xs uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-90"
             >
               Watch the film
-              <ArrowDown
-                size={16}
-                className="transition-transform group-hover:translate-y-0.5"
-              />
+              <ArrowDown size={16} className="transition-transform group-hover:translate-y-0.5" />
             </a>
 
             <a
@@ -207,7 +211,8 @@ export default function Home() {
               The history
             </a>
           </motion.div>
-        </motion.div>
+        </div>
+
         <div className="absolute bottom-8 left-0 w-full">
           <p className="container font-mono text-[0.7rem] uppercase tracking-[0.3em] text-muted">↓ Scroll</p>
         </div>
