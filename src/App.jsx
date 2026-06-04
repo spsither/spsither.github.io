@@ -9,6 +9,7 @@ import { lazy, Suspense } from 'react'
 import Home from './pages/Home'
 import PageSkeleton from './components/PageSkeleton'
 
+const NotFound = lazy(() => import('./pages/NotFound'))
 const Art = lazy(() => import('./pages/Art'))
 const Engineering = lazy(() => import('./pages/Engineering'))
 const About = lazy(() => import('./pages/About'))
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/art/:slug" element={<WorkDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
 
