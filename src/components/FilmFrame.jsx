@@ -29,6 +29,7 @@ export default function FilmFrame({ video, className = '', showProgress = false 
   const { scrollYProgress } = useScroll({
     target: frameRef,
     offset: ['start end', 'center center'],
+    layoutEffect: false,   
   })
   const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1])
   const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1])

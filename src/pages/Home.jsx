@@ -24,10 +24,10 @@ import protestImage from '../assets/protest.png'
 /* ── Parallax image (unchanged) ─────────────────────────────────────────── */
 function ParallaxImage({ src, alt, caption }) {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'], layoutEffect: false})
   const y = useTransform(scrollYProgress, [0, 1], ['-12%', '12%'])
   return (
-    <figure ref={ref} className="relative h-[70vh] overflow-hidden md:h-[85vh]">
+    <figure ref={ref} className="relative overflow-hidden" style={{ height: 'calc(75 * var(--vh))', }}>
       <motion.img style={{ y, scale: 1.2 }} src={src} alt={alt} className="h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent" />
       {caption && (
@@ -94,7 +94,8 @@ function TimelineRow({ t, delay = 0 }) {
               <img
                 src={t.image.src}
                 alt={t.image.alt}
-                className="h-[45vh] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] md:h-[55vh]"
+                style={{ height: 'calc(45 * var(--vh))' }}
+                className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent" />
               {t.image.caption && (
@@ -113,7 +114,7 @@ function TimelineRow({ t, delay = 0 }) {
 export default function Home() {
   const heroRef = useRef(null)
   const timelineRef = useRef(null)
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'], layoutEffect: false })
   const glowY = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
   const titleY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const titleOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
@@ -139,12 +140,11 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const lockHeight = () => {
-      document.documentElement.style.setProperty('--hero-h', `${window.innerHeight}px`);
-    };
-    lockHeight();
-    // Don't re-run on resize — that's the whole point
-  }, []);
+  const h = window.innerHeight;
+  document.documentElement.style.setProperty('--hero-h', `${h}px`);
+  document.documentElement.style.setProperty('--vh', `${h * 0.01}px`);
+  // Never re-run
+}, []);
   return (
     <main>
       {/* ── Hero ──────────────────────────────────────────────── */}
