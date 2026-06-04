@@ -138,13 +138,20 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    const lockHeight = () => {
+      document.documentElement.style.setProperty('--hero-h', `${window.innerHeight}px`);
+    };
+    lockHeight();
+    // Don't re-run on resize — that's the whole point
+  }, []);
   return (
     <main>
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section
         ref={heroRef}
         className="relative flex items-center overflow-hidden"
-        style={{ minHeight: "100dvh" }}   // dvh: stable on mobile, no address-bar jump
+        style={{ minHeight: "var(--hero-h)" }}
       >
         {/* Glow — no parallax, position stays locked */}
         <div className="glow pointer-events-none absolute left-1/2 top-1/2 h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2" />
